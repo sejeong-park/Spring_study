@@ -1,7 +1,7 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
@@ -9,7 +9,7 @@ import hello.core.member.MemoryMemberRepository;
 public class OrderServiceImpl implements OrderService{
     // member respository에서 회원 찾아야 하기 때문
     private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+    private DiscountPolicy discountPolicy;
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
