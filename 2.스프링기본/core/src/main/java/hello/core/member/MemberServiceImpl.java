@@ -1,10 +1,8 @@
 package hello.core.member;
 
 public class MemberServiceImpl implements MemberService{
-    // MemberServiceImple에서 회원 가입하고, 조회하려면
-    // MemberRepository에서 만들었던 구현 객체를 선언해야 한다.
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository; // 추상화에만 의존 (DIP)
 
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
