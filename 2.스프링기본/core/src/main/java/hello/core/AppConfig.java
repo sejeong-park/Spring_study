@@ -15,19 +15,37 @@ import org.springframework.context.annotation.Configuration;
 // 애플리케이션에 대한 환경 구성
 @Configuration
 public class AppConfig {
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+
+    // 의도
+    // Call AppConfig.memberService
+    // Call AppConfig.memberRepository
+    // Call AppConfig.memberRepository
+    // Call AppConfig.orderService
+    // Call AppConfig.memberRepository
+
+
+    // 의도와는 다르게 3번 호출
+    // Call AppConfig.memberService
+    // Call AppConfig.memberRepository
+    // Call AppConfig.orderService
 
     @Bean
     public MemberService memberService() {
+        System.out.println("Call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("Call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService(){
+        System.out.println("Call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
