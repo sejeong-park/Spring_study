@@ -36,8 +36,6 @@ class MemberRepositoryTest {
         System.out.println("findMember == Member : " + (findMember == member));
         // 같은 트랜잭션 안에서 저장하고 조회하면, "영속성 콘텍스트"가 똑같다.
         // 같은 영속성 콘텍스트는 ID값이 같으면 같은 Entity로 인식한다.
-
-
     }
 
 }
