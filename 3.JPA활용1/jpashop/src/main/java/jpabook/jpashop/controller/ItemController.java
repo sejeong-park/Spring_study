@@ -52,6 +52,7 @@ public class ItemController {
         Book item = (Book) itemService.findOne(itemId);
 
         BookForm form = new BookForm();
+
         form.setId(item.getId());
         form.setName(item.getName());
         form.setPrice(item.getPrice());
@@ -60,16 +61,16 @@ public class ItemController {
         form.setIsbn(item.getIsbn());
 
         model.addAttribute("form", form);
-        return "items/updateItemForm";
+        return "items/updateItemForm"; // 업데이트 화면으로 이동 필요
     }
 
     @PostMapping("items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form){
+    public String updateItem(@PathVariable String itemId, @ModelAttribute("form") BookForm form){
 
         Book book = new Book();
         book.setIsbn(form.getIsbn());
 
-        book.setId(form.getId());
+        book.setId(form.getId()); // ID 보안상 취약점 존재 -> SQL Injection -> 권한을 확인할 수 있는 로직 추가
         book.setName(form.getName());
         book.setPrice(form.getPrice());
         book.setStockQuantity(form.getStockQuantity());
@@ -77,9 +78,7 @@ public class ItemController {
         book.setIsbn(form.getIsbn());
 
         itemService.saveItem(book);
-        return "redirect:items";
-        
-
+        return "redirect:/items";
     }
 
 

@@ -14,9 +14,11 @@ public class ItemRepository {
     private final EntityManager em;
 
     public void save(Item item) {
+        // null 이면 새로운 객체를 만들고, null이 아니면 수정할 목적
         if (item.getId() == null) {
             em.persist(item);
         } else {
+            // merge의 정체가 멀까?
             em.merge(item);
         }
     }
